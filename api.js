@@ -69,7 +69,9 @@ module.exports = function (ramlPath) {
     })
     // then makes a stat() call for each file listed
     .then(function (files) {
-      files = files.map(function (f) {
+      files = files.filter(function(fileName) {
+      	return fileName.indexOf('.') != 0;
+      }).map(function (f) {
         return path.join(reqPath, f);
       });
       return Promise.all(files.map(stat));
